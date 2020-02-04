@@ -31,5 +31,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2",
+    "typescript": "^3.7.5"
   }
 }
