@@ -7,7 +7,7 @@ interface IState {
   year: number
   month: number
   day: number
-  selectedDay: number
+  selectedDate: Date
 }
 
 export default class Home extends React.Component<{}, IState> {
@@ -18,7 +18,7 @@ export default class Home extends React.Component<{}, IState> {
       year: 0,
       month: 0,
       day: 0,
-      selectedDay: 0,
+      selectedDate: new Date(),
     }
   }
   render() {
@@ -29,7 +29,7 @@ export default class Home extends React.Component<{}, IState> {
           month={this.state.month}
           day={this.state.day}
           today={this.state.today}
-          selectedDay={this.state.selectedDay}
+          selectedDate={this.state.selectedDate}
         ></Calendar>
       </div>
     )
@@ -42,7 +42,7 @@ export default class Home extends React.Component<{}, IState> {
       year: today.getFullYear(),
       month: today.getMonth() + 1,
       day: today.getDate(),
-      selectedDay: today.getDate(),
+      selectedDate: today,
     })
   }
 }
