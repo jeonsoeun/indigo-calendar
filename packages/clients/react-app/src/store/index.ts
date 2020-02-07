@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
 import calendar from './calendar'
 
-console.log(calendar)
-
 const rootReducer = combineReducers({
   calendar,
 })
