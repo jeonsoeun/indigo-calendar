@@ -22,12 +22,6 @@ export const Calendar: React.FC<{}> = () => {
         today.getMonth(),
         today.getDate()
       )
-      console.log(today)
-      console.log(
-        curDate.toString() === todayCopy.toString(),
-        curDate.toString(),
-        todayCopy.toString()
-      )
       dateTable.push(
         <CalendarCell
           curDay={curDay}
