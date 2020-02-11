@@ -1,4 +1,5 @@
 $week-color: #a0a0a0;
+$lite-color: #cccccc;
 .Calendar {
   width: 100%;
   height: 100%;
@@ -38,6 +39,9 @@ $week-color: #a0a0a0;
         flex-grow: 1;
         &.last-cell {
           border-right: none;
+        }
+        .txt-lite {
+          color: $lite-color;
         }
         .date-num {
           display: flex;

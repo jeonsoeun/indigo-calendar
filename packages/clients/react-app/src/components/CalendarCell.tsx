@@ -36,7 +36,7 @@ export const CalendarCell: React.FC<ICellProp> = (props) => {
       } ${isToday ? 'today' : ''}`}
     >
       <div className="date-num">
-        <div className={`date-num-txt ${isIncludedDay ? 'txt-lite' : ''}`}>
+        <div className={`date-num-txt ${isIncludedDay ? '' : 'txt-lite'}`}>
           {curDay}
         </div>
       </div>
