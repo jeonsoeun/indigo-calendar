@@ -9,6 +9,13 @@ $dark-gray: #4f4444;
   padding: 0.6rem 0.4rem 0 0.4rem;
   font-family: 'Cabin', 'Roboto', sans-serif;
   color: $dark-gray;
+  .small {
+    font-size: 1.5rem;
+  }
+  .korean {
+    font-family: 'Sunflower', 'Cabin', sans-serif;
+    font-weight: normal;
+  }
   .btn-turn {
     border: none;
     font-size: 1.5rem;

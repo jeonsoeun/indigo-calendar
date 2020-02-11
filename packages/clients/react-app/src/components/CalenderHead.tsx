@@ -25,7 +25,7 @@ const CalendarHead: React.FC<{}> = () => {
       </button>
       <span className="month">
         {month + 1}
-        <small>{`월`}</small>
+        <span className={`small korean`}>{`월`}</span>
       </span>
       <span className="year">{year}</span>
       <button className="btn-turn next" onClick={(e) => nextMonth()}>
