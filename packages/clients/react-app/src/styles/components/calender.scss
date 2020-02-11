@@ -1,17 +1,53 @@
+$border-color: #cccccc;
 .Calendar {
   width: 100%;
   height: 100%;
-  table {
-    width: 100%;
-    height: 100%;
-    tr {
-      width: 100%;
-    }
-  }
 }
 .CalendarHead {
-  text-align: center;
-  span {
-    margin: 0px 5px;
+}
+
+.CalendarBody {
+  padding: 5px;
+  .thead {
+    display: flex;
+    .thead-row {
+      display: flex;
+      width: 100%;
+      align-content: stretch;
+      // border-top: 2px solid $border-color;
+      // border-bottom: 2px solid $border-color;
+      .thead-cell {
+        width: 100%;
+        flex-grow: 1;
+        padding: 0.3rem 0 0.3rem 0;
+        // border-right: 1px solid $border-color;
+        font-weight: bold;
+        &.last-cell {
+          border-right: none;
+        }
+      }
+    }
+  }
+
+  .tbody {
+    .tbody-row {
+      display: flex;
+      width: 100%;
+      align-content: stretch;
+      // border-bottom: 1px solid $border-color;
+      .tbody-cell {
+        width: 100%;
+        flex-grow: 1;
+        // border-right: 1px solid $border-color;
+        &.last-cell {
+          border-right: none;
+        }
+        &.today {
+          .date-num {
+            background-color: #4545ff;
+          }
+        }
+      }
+    }
   }
 }

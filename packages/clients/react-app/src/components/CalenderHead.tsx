@@ -1,28 +1,30 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../store'
 import { setCurrentMonth } from '../store/calendar'
 
-interface IProp {
-  year: number
-  month: number
-  day: number
-}
+const CalendarHead: React.FC<{}> = () => {
+  const { selectedDate } = useSelector((state: RootState) => ({
+    ...state.calendar,
+  }))
 
-const CalendarHead: React.FC<IProp> = (props) => {
+  const year = selectedDate.getFullYear()
+  const month = selectedDate.getMonth()
+
   const dispatch = useDispatch()
   const nextMonth = () => {
-    dispatch(setCurrentMonth(props.month + 1))
+    dispatch(setCurrentMonth(month + 1))
   }
   const prevMonth = () => {
-    dispatch(setCurrentMonth(props.month - 1))
+    dispatch(setCurrentMonth(month - 1))
   }
   return (
     <div className="CalendarHead">
       <button className="btn-prev" onClick={(e) => prevMonth()}>
         {'<'}
       </button>
-      <span className="month">{props.month}</span>
-      <span className="year">{props.year}</span>
+      <span className="month">{month + 1}</span>
+      <span className="year">{year}</span>
       <button className="btn-next" onClick={(e) => nextMonth()}>
         {'>'}
       </button>

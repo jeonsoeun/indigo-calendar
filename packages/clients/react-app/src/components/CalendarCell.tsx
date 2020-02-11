@@ -1,21 +1,27 @@
 import React from 'react'
 
 interface ICellProp {
-  curMonth: number
   curDay: number
+  isLastOfWeek: boolean
   isIncludedDay: boolean
   isSelected: boolean
+  isToday: boolean
 }
 
 export const CalendarCell: React.FC<ICellProp> = (props) => {
+  const { curDay, isLastOfWeek, isIncludedDay, isSelected, isToday } = props
   return (
-    <td className="cal-cell">
-      <span className={`date-num ${props.isSelected && 'num-lite'}`}>
-        <span className={`date-num-txt ${props.isIncludedDay && 'num-lite'}`}>
-          {props.curDay}
+    <div
+      className={`tbody-cell ${isLastOfWeek ? 'last-cell' : ''} ${
+        isSelected ? 'selected' : ''
+      } ${isToday ? 'today' : ''}`}
+    >
+      <span className="date-num">
+        <span className={`date-num-txt ${isIncludedDay ? 'txt-lite' : ''}`}>
+          {curDay}
         </span>
       </span>
-    </td>
+    </div>
   )
 }
 

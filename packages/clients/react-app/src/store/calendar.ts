@@ -19,26 +19,21 @@ export const setSelectedDate = (newDate: Date) => ({
 /*** 리듀서 ***/
 // 초기상태 정의
 type CalendarState = {
-  year: number
-  month: number
-  day: number
   selectedDate: Date
   today: Date
 }
 const today = new Date()
+const selectedDate = new Date()
 const initState: CalendarState = {
-  year: today.getFullYear(),
-  month: today.getMonth() + 1,
-  day: today.getDate(),
-  selectedDate: today,
+  selectedDate: selectedDate,
   today: today,
 }
 const calendar = (state: CalendarState = initState, action: CalendarAction) => {
   switch (action.type) {
     case SET_CURRENT_MONTH:
+      state.selectedDate.setMonth(action.newMonth)
       return {
         ...state,
-        month: action.newMonth,
       }
     case SET_SELECTED_DATE:
       return {
