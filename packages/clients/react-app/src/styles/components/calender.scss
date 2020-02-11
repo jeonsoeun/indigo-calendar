@@ -1,6 +1,7 @@
 $week-color: #a0a0a0;
 $lite-color: #cccccc;
-$dark-gray: #4f4444;
+$title-color: #222268;
+$point-color: #4545f0;
 .Calendar {
   width: 100%;
   height: 100%;
@@ -8,7 +9,7 @@ $dark-gray: #4f4444;
 .CalendarHead {
   padding: 0.6rem 0.4rem 0 0.4rem;
   font-family: 'Cabin', 'Roboto', sans-serif;
-  color: $dark-gray;
+  color: $title-color;
   .small {
     font-size: 1.5rem;
   }
@@ -21,6 +22,7 @@ $dark-gray: #4f4444;
     font-size: 1.5rem;
     outline: none;
     background-color: Transparent;
+    color: $title-color;
   }
   .month {
     width: 2rem;
@@ -81,7 +83,7 @@ $dark-gray: #4f4444;
         }
         &.today {
           .date-num {
-            background-color: #4545ff;
+            background-color: $point-color;
             font-weight: 600;
             color: #fff;
           }
