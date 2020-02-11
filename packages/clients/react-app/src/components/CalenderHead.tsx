@@ -20,12 +20,15 @@ const CalendarHead: React.FC<{}> = () => {
   }
   return (
     <div className="CalendarHead">
-      <button className="btn-prev" onClick={(e) => prevMonth()}>
+      <button className="btn-turn prev" onClick={(e) => prevMonth()}>
         {'<'}
       </button>
-      <span className="month">{month + 1}</span>
+      <span className="month">
+        {month + 1}
+        <small>{`월`}</small>
+      </span>
       <span className="year">{year}</span>
-      <button className="btn-next" onClick={(e) => nextMonth()}>
+      <button className="btn-turn next" onClick={(e) => nextMonth()}>
         {'>'}
       </button>
     </div>
