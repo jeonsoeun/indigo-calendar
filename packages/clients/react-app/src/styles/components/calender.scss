@@ -1,4 +1,4 @@
-$border-color: #cccccc;
+$week-color: #a0a0a0;
 .Calendar {
   width: 100%;
   height: 100%;
@@ -10,18 +10,17 @@ $border-color: #cccccc;
   padding: 5px;
   .thead {
     display: flex;
+    font-family: 'Raleway', 'Roboto', sans-serif;
     .thead-row {
       display: flex;
       width: 100%;
       align-content: stretch;
-      // border-top: 2px solid $border-color;
-      // border-bottom: 2px solid $border-color;
       .thead-cell {
         width: 100%;
         flex-grow: 1;
-        padding: 0.3rem 0 0.3rem 0;
-        // border-right: 1px solid $border-color;
-        font-weight: bold;
+        padding: 0.3rem 0 0.3rem 0.4rem;
+        font-weight: 600;
+        color: $week-color;
         &.last-cell {
           border-right: none;
         }
@@ -34,17 +33,27 @@ $border-color: #cccccc;
       display: flex;
       width: 100%;
       align-content: stretch;
-      // border-bottom: 1px solid $border-color;
       .tbody-cell {
         width: 100%;
         flex-grow: 1;
-        // border-right: 1px solid $border-color;
         &.last-cell {
           border-right: none;
+        }
+        .date-num {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 2em;
+          height: 2em;
+          border-radius: 1em;
+          font-family: 'Cabin', 'Raleway', 'Roboto', sans-serif;
+          font-weight: 400;
         }
         &.today {
           .date-num {
             background-color: #4545ff;
+            font-weight: 600;
+            color: #fff;
           }
         }
       }
