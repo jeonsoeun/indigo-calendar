@@ -15,21 +15,12 @@ export const Calendar: React.FC<{}> = () => {
   const makeTableCell = (curDate: Date) => {
     const dateTable = []
     for (let d = 0; d < 7; d++) {
-      const curDay = curDate.getDate()
-      const curMonth = curDate.getMonth() + 1
-      const todayCopy = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate()
-      )
       dateTable.push(
         <CalendarCell
-          curDay={curDay}
-          isLastOfWeek={curDate.getDay() === 6}
-          isIncludedDay={curMonth === month}
-          isSelected={selectedDate === curDate}
-          isToday={curDate.toString() === todayCopy.toString()}
-          key={curDay + 10 * curMonth}
+          key={curDate.getDate() + 10 * curDate.getMonth()}
+          curDate={new Date(curDate)}
+          selectedDate={selectedDate}
+          today={today}
         ></CalendarCell>
       )
       curDate.setDate(curDate.getDate() + 1)
