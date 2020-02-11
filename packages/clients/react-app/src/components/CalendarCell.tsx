@@ -1,4 +1,6 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { setSelectedDate } from '../store/calendar'
 
 interface ICellProp {
   curDate: Date
@@ -7,6 +9,7 @@ interface ICellProp {
 }
 
 export const CalendarCell: React.FC<ICellProp> = (props) => {
+  const dispatch = useDispatch()
   // const { curDay, isLastOfWeek, isIncludedDay, isSelected, isToday } = props
   const { selectedDate, curDate, today } = props
   const copyToday = new Date(
@@ -29,11 +32,16 @@ export const CalendarCell: React.FC<ICellProp> = (props) => {
       curDate.getDate()
     ).toString()
   const isToday = curDate.toString() === copyToday.toString()
+
+  function selectDay() {
+    dispatch(setSelectedDate(new Date(curDate)))
+  }
   return (
     <div
       className={`tbody-cell ${isLastOfWeek ? 'last-cell' : ''} ${
         isSelected ? 'selected' : ''
       } ${isToday ? 'today' : ''}`}
+      onClick={selectDay}
     >
       <div className="date-num">
         <div className={`date-num-txt ${isIncludedDay ? '' : 'txt-lite'}`}>
