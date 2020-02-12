@@ -34,7 +34,11 @@ export const CalendarCell: React.FC<ICellProp> = (props) => {
   const isToday = curDate.toString() === copyToday.toString()
 
   function selectDay() {
-    dispatch(setSelectedDate(new Date(curDate)))
+    if (isSelected) {
+      // 메모 보여주는 창열기
+    } else {
+      dispatch(setSelectedDate(new Date(curDate)))
+    }
   }
   return (
     <div
