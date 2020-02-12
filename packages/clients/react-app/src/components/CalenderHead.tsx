@@ -1,22 +1,26 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store'
-import { setCurrentMonth } from '../store/calendar'
+import { setCurrentMonth, setSelectedDate } from '../store/calendar'
 
 const CalendarHead: React.FC<{}> = () => {
-  const { selectedDate } = useSelector((state: RootState) => ({
+  const { selectedDate, today } = useSelector((state: RootState) => ({
     ...state.calendar,
   }))
+  const dispatch = useDispatch()
 
   const year = selectedDate.getFullYear()
   const month = selectedDate.getMonth()
 
-  const dispatch = useDispatch()
   const nextMonth = () => {
     dispatch(setCurrentMonth(month + 1))
   }
   const prevMonth = () => {
     dispatch(setCurrentMonth(month - 1))
+  }
+
+  const showToday = () => {
+    dispatch(setSelectedDate(new Date(today)))
   }
   return (
     <div className="CalendarHead">
@@ -30,6 +34,13 @@ const CalendarHead: React.FC<{}> = () => {
       <span className="year">{year}</span>
       <button className="btn-turn next" onClick={(e) => nextMonth()}>
         {'>'}
+      </button>
+      <button
+        type="button"
+        className="btn-today btn btn-outline-secondary btn-sm"
+        onClick={() => showToday()}
+      >
+        오늘
       </button>
     </div>
   )
