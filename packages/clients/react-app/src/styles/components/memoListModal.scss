@@ -1,0 +1,42 @@
+.MemoListModal {
+  font-family: 'Sunflower', 'Cabin', sans-serif;
+  .modal-header {
+    .modal-title {
+      font-weight: bold;
+      .day {
+        font-size: 2rem;
+      }
+      .week {
+        margin-right: 0.5rem;
+        font-size: 1.5rem;
+      }
+      .month,
+      .year {
+        margin-right: 0.2rem;
+        font-size: 1.3rem;
+      }
+    }
+    .close {
+      span {
+        font-size: 2.5rem;
+      }
+    }
+  }
+  .modal-body {
+  }
+  .modal-footer {
+    .btn-add-memo {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      span {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
