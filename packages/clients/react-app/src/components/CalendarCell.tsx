@@ -1,5 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import $ from 'jquery'
+import 'bootstrap'
 import { setSelectedDate } from '../store/calendar'
 
 interface ICellProp {
@@ -10,7 +12,6 @@ interface ICellProp {
 
 export const CalendarCell: React.FC<ICellProp> = (props) => {
   const dispatch = useDispatch()
-  // const { curDay, isLastOfWeek, isIncludedDay, isSelected, isToday } = props
   const { selectedDate, curDate, today } = props
   const copyToday = new Date(
     today.getFullYear(),
@@ -35,7 +36,7 @@ export const CalendarCell: React.FC<ICellProp> = (props) => {
 
   function selectDay() {
     if (isSelected) {
-      // 메모 보여주는 창열기
+      $('#MemoListModal').modal('show')
     } else {
       dispatch(setSelectedDate(new Date(curDate)))
     }

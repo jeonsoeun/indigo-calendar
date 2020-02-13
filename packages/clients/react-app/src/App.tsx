@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Home from './pages/Home'
+import MemoListModal from './components/MemoListModal'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      <MemoListModal></MemoListModal>
     </div>
   )
 }
