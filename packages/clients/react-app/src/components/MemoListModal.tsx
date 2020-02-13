@@ -13,13 +13,19 @@ export const MemoListModal: React.FC<{}> = () => {
 
   const memoListElement = []
   for (let [key, memo] of memoList) {
-    memoListElement.push(
-      <MemoListItem
-        title={memo.title}
-        label={memo.label}
-        key={key}
-      ></MemoListItem>
+    const memoDate = new Date(key)
+    if (
+      selectedDate.getFullYear() === memoDate.getFullYear() &&
+      selectedDate.getMonth() === memoDate.getMonth() &&
+      selectedDate.getDate() === memoDate.getDate()
     )
+      memoListElement.push(
+        <MemoListItem
+          title={memo.title}
+          label={memo.label}
+          key={key}
+        ></MemoListItem>
+      )
   }
 
   return (
@@ -44,7 +50,11 @@ export const MemoListModal: React.FC<{}> = () => {
             </button>
           </div>
           <div className="modal-body">
-            <div className="memo-list list-group">{memoListElement}</div>
+            {memoListElement.length > 0 ? (
+              <div className="memo-list list-group">{memoListElement}</div>
+            ) : (
+              <div className="memo-list-no-item">메모가 없습니다.</div>
+            )}
           </div>
           <div className="modal-footer">
             <button className="btn-add-memo btn btn-primary">

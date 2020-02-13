@@ -1,3 +1,4 @@
+@import '../color.scss';
 .MemoListModal {
   font-family: 'Sunflower', 'Cabin', sans-serif;
   .modal-header {
@@ -22,8 +23,14 @@
       }
     }
   }
+
   .modal-body {
+    .memo-list-no-item {
+      text-align: center;
+      color: $week-color;
+    }
   }
+
   .modal-footer {
     .btn-add-memo {
       width: 2.5rem;
@@ -37,6 +44,23 @@
         font-size: 1.5rem;
         font-weight: bold;
       }
+    }
+  }
+}
+
+.MemoListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .memo-title {
+    font-family: 'Cabin', 'Roboto', sans-serif;
+  }
+  .memo-label {
+    width: 2rem;
+    height: 1.2rem;
+    border-radius: 3px;
+    &.red {
+      background-color: #f72210;
     }
   }
 }
