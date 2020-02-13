@@ -1,2 +1,2 @@
-# web-calendar
+# EveryboDay
 Simple web calendar with React
