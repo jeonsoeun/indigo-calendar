@@ -5,27 +5,29 @@ import { RootState } from '../store'
 import '../styles/components/memoListModal.scss'
 
 import MemoListItem from './MemoListItem'
+import { yyyymmdd } from '../utill/date'
+import { Memo } from '../store/memo'
 
 export const MemoListModal: React.FC<{}> = () => {
   const { selectedDate } = useSelector((state: RootState) => state.calendar)
   const { memoList } = useSelector((state: RootState) => state.memo)
   const week = ['일', '월', '화', '수', '목', '금', '토']
 
-  const memoListElement = []
-  for (let [key, memo] of memoList) {
+  const memoListElement: JSX.Element[] = []
+  for (let [key, dailyMemos] of memoList) {
     const memoDate = new Date(key)
-    if (
-      selectedDate.getFullYear() === memoDate.getFullYear() &&
-      selectedDate.getMonth() === memoDate.getMonth() &&
-      selectedDate.getDate() === memoDate.getDate()
-    )
-      memoListElement.push(
-        <MemoListItem
-          title={memo.title}
-          label={memo.label}
-          key={key}
-        ></MemoListItem>
-      )
+    if (yyyymmdd(memoDate) === yyyymmdd(selectedDate)) {
+      dailyMemos.map((memo: Memo, index) => {
+        memoListElement.push(
+          <MemoListItem
+            title={memo.title}
+            label={memo.label}
+            key={key}
+          ></MemoListItem>
+        )
+        return true
+      })
+    }
   }
 
   return (
