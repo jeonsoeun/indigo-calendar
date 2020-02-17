@@ -1,4 +1,14 @@
-import { yyyymmdd } from '../utill/date'
+import { yyyymmdd } from '../utill/dateUtill'
+
+// static data
+export const LABELS = [
+  'red',
+  'coral',
+  'orange',
+  'oliveDrab',
+  'royalBlue',
+  'indigo',
+]
 
 // 메모 타입
 export type Memo = {

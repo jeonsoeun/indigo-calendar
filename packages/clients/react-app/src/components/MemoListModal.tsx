@@ -5,8 +5,9 @@ import { RootState } from '../store'
 import '../styles/components/memoListModal.scss'
 
 import MemoListItem from './MemoListItem'
-import { yyyymmdd } from '../utill/date'
+import { yyyymmdd } from '../utill/dateUtill'
 import { Memo } from '../store/memo'
+import { Link } from 'react-router-dom'
 
 export const MemoListModal: React.FC<{}> = () => {
   const { selectedDate } = useSelector((state: RootState) => state.calendar)
@@ -59,9 +60,9 @@ export const MemoListModal: React.FC<{}> = () => {
             )}
           </div>
           <div className="modal-footer">
-            <button className="btn-add-memo btn btn-primary">
+            <Link to="/editor" className="btn-add-memo btn btn-primary">
               <span>+</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
