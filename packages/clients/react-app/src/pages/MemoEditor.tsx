@@ -1,22 +1,36 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import $ from 'jquery'
 import 'bootstrap'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 import { LABELS } from '../store/memo'
 import '../styles/pages/memoEditor.scss'
 import { RootState } from '../store'
+import { setSelectedDate } from '../store/calendar'
 
 export const MemoEditor: React.FC = () => {
+  const dispatch = useDispatch()
   useEffect(() => {
     $('.modal-backdrop').remove()
   })
   const selectedMemo = useSelector(
     (state: RootState) => state.memo.selectedMemo
   )
+  const { selectedDate } = useSelector((state: RootState) => state.calendar)
   const [label, setLabel] = useState('coral')
   if (selectedMemo) {
     setLabel(selectedMemo.label)
+  }
+
+  const selectLabel = (newLabel: string) => {
+    setLabel(newLabel)
+  }
+  const handleSelectedDate = (newDate: Date | null) => {
+    if (newDate !== null) {
+      dispatch(setSelectedDate(newDate))
+    }
   }
   return (
     <div className="MemoEditor">
@@ -38,14 +52,31 @@ export const MemoEditor: React.FC = () => {
             </div>
           </button>
           <div className="labels dropdown-menu" aria-labelledby="pickMemoLabel">
-            {LABELS.map((label, index) => {
+            {LABELS.map((lb, index) => {
               return (
-                <div className="dropdown-items" key={index}>
-                  <div className={`label-color ${label}`}></div>
+                <div
+                  className={`dropdown-items ${lb}`}
+                  key={index}
+                  onClick={() => selectLabel(lb)}
+                >
+                  <span>{lb === label ? 'V' : ''}</span>
                 </div>
               )
             })}
           </div>
+        </div>
+        <div className="memo-date">
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => {
+              handleSelectedDate(date)
+            }}
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={30}
+            timeCaption="time"
+            dateFormat="yyyy/MM/dd h:mm aa"
+          ></DatePicker>
         </div>
       </div>
       <div className="sub-info container"></div>

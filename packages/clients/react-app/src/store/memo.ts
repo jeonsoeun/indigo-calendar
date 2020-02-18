@@ -4,7 +4,7 @@ import { yyyymmdd } from '../utill/dateUtill'
 export const LABELS = [
   'red',
   'coral',
-  'orange',
+  'gold',
   'oliveDrab',
   'royalBlue',
   'indigo',
