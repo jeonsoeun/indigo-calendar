@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 
 export const MemoListModal: React.FC<{}> = () => {
   const { selectedDate } = useSelector((state: RootState) => state.calendar)
-  const { memoList } = useSelector((state: RootState) => state.memo)
+  const { memoList } = useSelector((state: RootState) => ({ ...state.memo }))
   const week = ['일', '월', '화', '수', '목', '금', '토']
 
   const memoListElement: JSX.Element[] = []
@@ -21,9 +21,9 @@ export const MemoListModal: React.FC<{}> = () => {
       dailyMemos.map((memo: Memo, index) => {
         memoListElement.push(
           <MemoListItem
-            title={memo.title}
-            label={memo.label}
-            key={key}
+            memo={memo}
+            index={index}
+            key={`${key} ${index}`}
           ></MemoListItem>
         )
         return true

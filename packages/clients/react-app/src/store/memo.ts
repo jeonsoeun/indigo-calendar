@@ -12,20 +12,26 @@ export const LABELS = [
 
 // 메모 타입
 export type Memo = {
+  mapKey?: string
+  arrayIndex?: number
   date: Date
   title: string
   contents: string
   label: string
 }
 
+export type SelectedMemo = {}
+
 // 액션 타입정의
-const SET_NEW_MEMO = 'memo/setCurrentMonth' as const
+const SET_NEW_MEMO = 'memo/setNewMemo' as const
+const UPDATE_MEMO = 'memo/updateMemo' as const
 const SET_SELECTED_MEMO = 'memo/setSelectedMemo' as const
 
 // 액션 함수정의
 type MemoAction =
   | ReturnType<typeof setNewMemo>
   | ReturnType<typeof setSelectedMemo>
+  | ReturnType<typeof updateMemo>
 
 export const setNewMemo = (newMemo: Memo) => {
   if (!newMemo.title) {
@@ -42,6 +48,15 @@ export const setSelectedMemo = (mapKey: string, arrayIndex: number) => {
     type: SET_SELECTED_MEMO,
     mapKey,
     arrayIndex,
+  }
+}
+
+export const updateMemo = (mapKey: string, arrayIndex: number, memo: Memo) => {
+  return {
+    type: UPDATE_MEMO,
+    mapKey,
+    arrayIndex,
+    memo,
   }
 }
 
@@ -69,7 +84,9 @@ const memo = (state: MemoState = initState, action: MemoAction) => {
       let dailyMemoList = state.memoList.get(yyyymmdd(action.newMemo.date))
       if (dailyMemoList) {
         dailyMemoList.push(action.newMemo)
-      } else dailyMemoList = [action.newMemo]
+      } else {
+        dailyMemoList = [action.newMemo]
+      }
       return {
         ...state,
         memoList: state.memoList.set(
@@ -77,11 +94,30 @@ const memo = (state: MemoState = initState, action: MemoAction) => {
           dailyMemoList
         ),
       }
+    case UPDATE_MEMO:
+      const memoArray = state.memoList.get(action.mapKey)
+      if (memoArray) {
+        memoArray[action.arrayIndex] = action.memo
+        return {
+          ...state,
+          memoList: state.memoList.set(action.mapKey, memoArray),
+        }
+      } else {
+        return state
+      }
     case SET_SELECTED_MEMO:
       const memoList = state.memoList.get(action.mapKey)
-      return {
-        ...state,
-        selectedMemo: memoList ? memoList[action.arrayIndex] : null,
+      if (memoList && memoList[action.arrayIndex]) {
+        return {
+          ...state,
+          selectedMemo: {
+            mapKey: action.mapKey,
+            arrayIndex: action.arrayIndex,
+            ...memoList[action.arrayIndex],
+          },
+        }
+      } else {
+        return state
       }
     default:
       return state

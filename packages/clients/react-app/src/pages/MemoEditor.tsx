@@ -5,10 +5,10 @@ import 'bootstrap'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-import { LABELS } from '../store/memo'
+import { LABELS, Memo } from '../store/memo'
 import '../styles/pages/memoEditor.scss'
 import { RootState } from '../store'
-import { setNewMemo } from '../store/memo'
+import { setNewMemo, updateMemo } from '../store/memo'
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
 
 export const MemoEditor: React.FC<RouteComponentProps> = (props) => {
@@ -20,13 +20,20 @@ export const MemoEditor: React.FC<RouteComponentProps> = (props) => {
     (state: RootState) => state.memo.selectedMemo
   )
   const { selectedDate } = useSelector((state: RootState) => state.calendar)
-  const [label, setLabel] = useState('coral')
-  const [memoDate, setDate] = useState(new Date(selectedDate))
-  const [memoTitle, setTitle] = useState('')
-  const [memoDetail, setDetail] = useState('')
-  if (selectedMemo) {
-    setLabel(selectedMemo.label)
-  }
+  const [label, setLabel] = useState(
+    selectedMemo && selectedMemo.label ? selectedMemo.label : 'coral'
+  )
+  const [memoDate, setDate] = useState(
+    selectedMemo && selectedMemo.date
+      ? selectedMemo.date
+      : new Date(selectedDate)
+  )
+  const [memoTitle, setTitle] = useState(
+    selectedMemo && selectedMemo.title ? selectedMemo.title : ''
+  )
+  const [memoDetail, setDetail] = useState(
+    selectedMemo && selectedMemo.contents ? selectedMemo.contents : ''
+  )
 
   const selectLabel = (newLabel: string) => {
     setLabel(newLabel)
@@ -38,15 +45,29 @@ export const MemoEditor: React.FC<RouteComponentProps> = (props) => {
   }
 
   const handleSave = () => {
-    const title: string = memoTitle
-    dispatch(
-      setNewMemo({
-        title: title,
+    // 이미 있는 메모이면(메모 수정일떄)
+    if (selectedMemo) {
+      const updatedMemo: Memo = {
+        title: memoTitle,
         date: memoDate,
         contents: memoDetail,
         label: label,
-      })
-    )
+      }
+      if (selectedMemo.mapKey && selectedMemo.arrayIndex) {
+        dispatch(
+          updateMemo(selectedMemo.mapKey, selectedMemo.arrayIndex, updatedMemo)
+        )
+      }
+    } else {
+      dispatch(
+        setNewMemo({
+          title: memoTitle,
+          date: memoDate,
+          contents: memoDetail,
+          label: label,
+        })
+      )
+    }
     props.history.push('/')
   }
 
@@ -59,6 +80,7 @@ export const MemoEditor: React.FC<RouteComponentProps> = (props) => {
             id="memo-title-input"
             placeholder={'제목'}
             onChange={({ target: { value } }) => setTitle(value)}
+            value={memoTitle}
           />
         </div>
         <div className="memo-label dropdown">
@@ -109,6 +131,7 @@ export const MemoEditor: React.FC<RouteComponentProps> = (props) => {
             aria-label="With textarea"
             placeholder={`내용`}
             onChange={({ target: { value } }) => setDetail(value)}
+            value={memoDetail}
           ></textarea>
         </div>
       </div>
