@@ -46,8 +46,6 @@ export const MemoEditor: React.FC<RouteComponentProps> = (props) => {
 
   const handleSave = () => {
     // 이미 있는 메모이면(메모 수정일떄)
-    console.log('f')
-    console.log(selectedMemo)
     if (selectedMemo) {
       const updatedMemo: Memo = {
         title: memoTitle,
