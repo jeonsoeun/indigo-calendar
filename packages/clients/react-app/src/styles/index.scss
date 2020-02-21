@@ -23,5 +23,9 @@ code {
 }
 
 .App {
+  position: relative;
+  margin: auto;
+  max-width: 720px;
+  max-height: 1680px;
   height: 100%;
 }
