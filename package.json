@@ -13,7 +13,8 @@
   "scripts": {
     "start": "echo \"각 workspace를 실행해주세요.\"",
     "start:react": "yarn workspace @project/react-app start",
-    "build:react": "yarn workspace @project/react-app build"
+    "build:react": "yarn workspace @project/react-app build",
+    "deploy:react": "yarn workspace @project/react-app firebase deploy"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
